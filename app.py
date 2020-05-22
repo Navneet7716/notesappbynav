@@ -9,7 +9,6 @@ ENV = 'prod'
 if ENV == 'dev':
 	app.debug = True
 	app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:dhruvrishi123@localhost:5432/noteapp'
-
 else:
 	app.debug = False
 	app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://jkepbppkbomfmb:f11db2ae8f4d51983fbff283e0301dc52ec32b094c119ec8df935ba4e7a92c65@ec2-3-222-150-253.compute-1.amazonaws.com:5432/d713ruits1dbue'
