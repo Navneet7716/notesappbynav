@@ -44,7 +44,7 @@ class Notes(db.Model):
 		self.notes_id = notes_id
 
 
-@app.route("/", methods=["GET","POST"])
+@app.route("/")
 def signup():
 	return render_template("signin.html")
 
