@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Magazee HTML5 Template Mo</title>
+<!-- 
+Magazee Template 
+http://www.templatemo.com/tm-514-magazee
+-->
+  <!-- load CSS -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">  <!-- Google web font "Open Sans" -->
+  <link rel="stylesheet" href="../static/css2/main.css">                                        <!-- https://getbootstrap.com/ -->
+  <link rel="stylesheet" href="../static/css2/util.css">                                     <!-- Templatemo style -->
+
+</head>
+
+<body>
+  <!-- Loader -->
+ <div id="loader-wrapper">
+    <div id="loader"></div>
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+  </div>
+
+ <div class="container">
+
+<!-- 2nd section -->
+    {% for note in notels %}
+<section class="row tm-section tm-col-md-reverse">
+ <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+  <div class="tm-flex-center p-5">
+    <div class="tm-md-flex-center">
+      <h2 class="tm-text-color-primary mb-4">{{ note.title }}</h2>
+      <p class="mb-4">{{ note.content}}</p>
+      <form action="{{ url_for('delete', deletenote = note.id, userid = note.notes_id) }}" method="post">
+            <button class="btn btn-primary float-lg-right tm-md-align-center">DELETE</button>
+        </form>
+    </div>
+  </div>
+</div>
+<div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 p-0">
+  <div class="tm-flex-center p-5 tm-bg-color-primary">
+    <div class="tm-max-w-400 tm-flex-center tm-flex-col">
+      <img src="../static/img2/icons8-note-64.png" alt="Image" class="rounded-circle mb-4">
+    </div>
+  </div>
+</div>
+</section>
+  {% endfor %}
+<!-- 3rd Section -->
+
+<!-- 4th Section -->
+
+<!-- 5th Section -->
+
+<!-- 6th Section -->
+<section class="row">
+  <div class="col-lg-12 tm-form-header pl-5 pr-5">
+    <h2 class="tm-container-inner tm-text-color-white">Add Note</h2>
+  </div>
+  <div class="col-lg-12 pl-2 pl-sm-3 pl-md-5 pr-2 pr-sm-3 pr-md-5">
+    <form action="{{ url_for('note', user_id = u_id) }}" method="post" class="row tm-container-inner tm-contact-form">
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="form-group">
+          <input type="text" id="contact_name" name="title" class="form-control" placeholder="Title"  required/>
+        </div>
+
+        <div class="form-group">
+          <textarea id="contact_message" name="content" class="form-control" rows="6" placeholder="Type Your Note" required/></textarea>
+        </div>
+      </div>
+      <div class="col-xs-12 mt-4 tm-center">
+        <button type="submit" class="btn btn-primary">Add</button>
+      </div>
+    </form>
+  </div>
+  <div class="col-lg-12 tm-bg-color-gray tm-text-color-white tm-font-thin tm-form-footer">
+    <div class="row tm-container-inner">
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="tm-footer-info-box">
+          <h4>My Notes By Navneet</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<div class="row">
+  <div class="col-lg-12">
+    <p class="text-center small tm-copyright-text mb-0">Copyright &copy; <span class="tm-current-year">2018</span> Designed by Bootstrap | Made By Navneet</p>
+  </div>
+</div>
+</div>
+<!-- load JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="../static/js2/jquery-3.2.1.slim.min.js"></script>         <!-- https://jquery.com/ -->
+<script>
+
+  /* DOM is ready
+  ------------------------------------------------*/
+  $(function(){
+
+    if(renderPage) {
+      $('body').addClass('loaded');
+    }
+
+    $('.tm-current-year').text(new Date().getFullYear());  // Update year in copyright
+  });
+
+</script>
+
+</body>
+</html>
