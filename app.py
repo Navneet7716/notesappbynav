@@ -72,7 +72,7 @@ def user():
 		email = request.form.get('username')
 		password = request.form.get('pass')
 		y = db.session.query(User).filter(User.username == email and User.password == password).first()
-		if y == None or "=" or "1or1" in password:
+		if y == None:
 			return render_template("raw.html", title="FAIL", message="USER DOESN'T EXISTS!")
 		
 		return redirect(url_for('note', user_id= y.id))
