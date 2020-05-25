@@ -62,11 +62,11 @@ def success():
 
 
 
-@app.route("/login", methods=["GET", "POST"])
+@app.route("/login", methods=["GET"])
 def login():
 	return render_template("login2.html")
 
-@app.route("/login/users", methods=["POST","GET"])
+@app.route("/login/users", methods=["POST"])
 def user():
 	if request.method == "POST":
 		email = request.form.get('username')
@@ -78,7 +78,7 @@ def user():
 		return redirect(url_for('note', user_id= y.id))
 
 
-@app.route("/login/users/?jnkjn25<int:user_id>9mnkjb", methods=["POST", "GET"])
+@app.route("/login/users/?jnkjn25<int:user_id>9mnkjb", methods=["POST"])
 def note(user_id):
 	if request.method == "POST":
 		t = request.form.get('title')
