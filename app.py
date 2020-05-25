@@ -71,8 +71,8 @@ def user():
 	if request.method == "POST":
 		email = request.form.get('username')
 		password = request.form.get('pass')
-		y = db.session.query(User).filter(User.username == email and User.password == password).first()
-		if y == None:
+		y = db.session.query(User).filter(User.username == email).filter(User.password == password).first()
+		if y == None or "1or1" in password or "=" in password:
 			return render_template("raw.html", title="FAIL", message="USER DOESN'T EXISTS!")
 		
 		return redirect(url_for('note', user_id= y.id))
@@ -83,7 +83,7 @@ def note(user_id):
 	if request.method == "POST":
 		t = request.form.get('title')
 		c = request.form.get('content')
-		if t == "" or c == "":
+		if t == "" and c == "":
 			y = db.session.query(Notes).filter(Notes.notes_id == user_id).all()
 			return render_template("note.html", notels=y, u_id=user_id)
 		data = Notes(t,c,user_id)
