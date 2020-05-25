@@ -1,66 +1,126 @@
 <!DOCTYPE html>
 <html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Crimson+Text|Work+Sans:400,700" rel="stylesheet">
 <head>
-	<title>MY NOTES</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <title>MY NOTES</title>
+  <style>
+    body {
+      font-family: 'Work Sans', sans-serif;
+     }
+     
+     h1, h2, h3, h4, h5, h6 {
+      font-family: 'Crimson Text', serif;
+     }
+    
+    .navbar {
+      width: 100%;
+      background-color: #555;
+      overflow: auto;
+    }
+    
+    .navbar a {
+      float: left;
+      padding: 12px;
+      color: white;
+      text-decoration: none;
+      font-size: 17px;
+    }
+    
+    .navbar a:hover {
+      background-color: #000;
+    }
+    
+    .active {
+      background-color: rgb(13, 59, 212);
+    }
+    
+    @media screen and (max-width: 500px) {
+      .navbar a {
+        float: none;
+        display: block;
+      }
+    }
+
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      max-width: 300px;
+      margin: auto;
+      text-align: center;
+      font-family: arial;
+    }
+    
+    .title {
+      color: grey;
+      font-size: 18px;
+    }
+    
+    button {
+      border: none;
+      outline: 0;
+      display: inline-block;
+      padding: 8px;
+      color: white;
+      background-color: #000;
+      text-align: center;
+      cursor: pointer;
+      width: 100%;
+      font-size: 18px;
+    }
+    
+    a {
+      text-decoration: none;
+      font-size: 22px;
+      color: black;
+    }
+    
+    button:hover, a:hover {
+      opacity: 0.7;
+    }
+    .notecontent{
+      padding-top: 3px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+
+    }
+    .titlen {
+      padding: 3px 3px 3px 3px;
+      margin-top: 20px;
+    }
+    </style>
+  <script>
+     // document.addEventListener("DOMContentLoaded", () => {
+       // history.pushState(null,"lol",'notes')
+    //  })
+  </script>
 </head>
 <body >
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-    <div class="container">
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #d1ff2b;">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <a class="navbar-brand" href="#">MY NOTES BY NAVNEET</a>
-
-  <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      <li class="nav-item active">
-        <a class="nav-link" href="{{ url_for('note', user_id = u_id) }}">HOME<span class="sr-only">(current)</span></a>
-      </li>
-       <li class="nav-item">
-        <a class="nav-link" href="#">My Notes</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('login') }}">LOGOUT</a>
-      </li>
-    </ul>
+  <div class="navbar">
+    <a class="active" href="#"><i class="fa fa-fw fa-home"></i> Home</a> 
+    <a href="{{ url_for('login') }}"><i class="fa fa-fw fa-user"></i> Logout</a>
   </div>
-</nav>
-</div>
-<div class="container-sm" style="text-align:center">
-    <div class="p-5 m-4">
-    <h2 style="text-align:center">These Are Your Notes</h2></div>
+  <h2 style="text-align:center">NOTES</h2>
         {% for note in notels %}
-        <div class="card-deck">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">{{ note.title }}</h5>
-              <p class="card-text">{{ note.content}}</p>
-              <form action="{{ url_for('delete', deletenote = note.id, userid = note.notes_id) }}" method="post">
-                    <button class="btn btn-danger">DELETE</button>
-                </form>
-            </div>
+        <div class="card">
+          <h1> {{ note.title }} </h1>
+          <p class="title">{{ note.content}}</p>
+          <div style="margin: 24px 0;">
           </div>
+          <p> <form action="{{ url_for('delete', deletenote = note.id, userid = note.notes_id) }}" method="post">
+            <button>DELETE</button>
+        </form></p>
         </div>
-
         {% endfor %}
- <div class="row m-4">
-  <div class="col-sm-6">
+
+
     <div class="card">
-      <div class="card-body">
     <form action="{{ url_for('note', user_id = u_id) }}" method="post">
-        <input class="form-group" type="text" name="title" placeholder="Title">
-        <textarea class="form-control" name="content" placeholder="Type Your Note" cols="30" rows="10"></textarea> 
-        <button class="btn btn-outline-success form-control">Add Note</button>
+        <input type="text" name="title" placeholder="Title" class="titlen">
+        <textarea name="content" placeholder="Type Your Note" cols="30" rows="10" class="notecontent"></textarea> 
+        <button >Add Note</button>
     </form>
 
-</div>
-</div>
-</div>
-</div>
 </div>
 </body>
 </html>

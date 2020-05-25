@@ -62,11 +62,11 @@ def success():
 
 
 
-@app.route("/login", methods=["GET"])
+@app.route("/login")
 def login():
 	return render_template("login2.html")
 
-@app.route("/login/users", methods=["POST"])
+@app.route("/login/users", methods=["POST", "GET"])
 def user():
 	if request.method == "POST":
 		email = request.form.get('username')
@@ -78,11 +78,14 @@ def user():
 		return redirect(url_for('note', user_id= y.id))
 
 
-@app.route("/login/users/?jnkjn25<int:user_id>9mnkjb", methods=["POST"])
+@app.route("/login/users/?jnkjn25fhdsifk0219u981bidbfak<int:user_id>9mnkjb", methods=["POST", "GET"])
 def note(user_id):
 	if request.method == "POST":
 		t = request.form.get('title')
 		c = request.form.get('content')
+		if t == "" or c == "":
+			y = db.session.query(Notes).filter(Notes.notes_id == user_id).all()
+			return render_template("note.html", notels=y, u_id=user_id)
 		data = Notes(t,c,user_id)
 		db.session.add(data)
 		db.session.commit()
